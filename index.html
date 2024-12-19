@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
+		<title>这里有棵桃桃</title>
+		<link href=" https://cdn.jsdelivr.net/npm/element-plus@2.7.8/dist/index.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue@3.4.35/dist/vue.global.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/element-plus@2.7.8/dist/index.full.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+		<style>
+			.el-row {
+				padding: 20px;
+			}
+			.el-col:first-child {
+				margin-right: 20px;
+			}
+			.song-item {
+				margin: 0 8px 10px 0;
+		
+    			white-space: break-spaces;
+			}
+			.song-list {
+				display: block;
+				border: 1px solid rgb(255, 127, 77);
+				border-radius: 20px;
+				margin-bottom: 20px;
+			}
+			.song-low {
+				min-width: 80px;
+			}
+			.song-list .el-card__body {
+    			padding: 20px 15px 10px 15px;
+			}
+			.el-tag{
+			    justify-content: flex-start;
+			    height: unset;
+			    padding: 5px 0 5px 9px;
+			}
+			body {
+				background-image: linear-gradient(
+					45deg,
+					#ffc3d7 25%,
+					#f5f5f5 25%,
+					#fff5f5 50%,
+					#ffc3d7 50%,
+					#ffc3d7 75%,
+					#ffffff 75%,
+					#f1f1f1 100%
+				);
+				background-size: 56.57px 56.57px;
+			}
+			@media screen and (orientation: landscape) {
+				#app {
+					width: 51%;
+					margin: 0 auto;
+				}
+			}
+			.slogan {
+				margin: 0 auto;
+				background: url();
+				background-repeat: no-repeat;
+				background-size: 100%;
+				margin-bottom: 40px;
+				width: 500px;
+				height: 250px;;
+			}
+			.logo {
+				text-shadow: 1px 1px 2px black;
+				color: #ffffff;
+				font-size: 70px;
+				font-weight: bolder;
+			}
+			.logo-cn {
+				text-shadow: 1px 1px 2px black;
+				color: #f38b14;
+				font-size: 30px;
+				font-weight: bolder;
+				text-align: right;
+			}
+			.el-tag.el-tag--success {
+			    --el-tag-text-color:  #cb54b1;
+				font-size: 12px;
+			}
+                <!--颜色-->
+
+		</style>
+	</head>
+	<body  class="example">
+		<div id="app" class="example">
+			<el-card class="slogan">
+				<div class="logo"></div>
+				<div class="logo-cn">这里有颗桃桃</div>
+			</el-card>
+			<el-card v-for="i in 5" class="song-list">
+				<div :ref="i == 1 ? `songListRef${i}` : ''" :style="{height: (ceil(songzh[`s${i}`].length / floor(wwidth/iw)) * ih) + 'px'}" style="display: flex;flex-direction: column;flex-wrap: wrap;">
+					<el-tag
+						v-for="item in songzh[`s${i}`]"
+						class="song-item song-low"
+						disable-transitions
+						type="success"
+					>
+						{{item}}
+					</el-tag>
+				</div>
+			</el-card>
+			<el-card class="song-list">
+				<div :style="{height: (ceil(songzh.so.length / floor(wwidth/120)) * ih + 30) + 'px'}" style="display: flex;flex-direction: column;flex-wrap: wrap;">
+					<el-tag
+						v-for="item in songzh.so"
+						class="song-item"
+						disable-transitions
+						type="success"
+					>
+						{{item}}
+					</el-tag>
+				</div>
+			</el-card>
+			<el-card class="song-list" v-if="english.length">
+				<div :style="{height: (ceil(songzh.so.length / floor(wwidth/120)) * ih) + 'px'}" style="display: flex;flex-direction: column;flex-wrap: wrap;">
+					<el-tag class="song-item" v-for="item in english" disable-transitions
+						type="success">
+						{{item}}
+					</el-tag>
+				</div>
+			</el-card>
+		</div>
+	</body>
+	<script type="module">
+		const { createApp, ref, onMounted, watch } = Vue
+		const app = Vue.createApp({
+			setup() {
+				window.songs = {
+					zhcn: ['荒',
+					'枫',
+					'他',
+					'暖',
+					'雨',
+					'谁',
+					'夸',
+					'门',
+					'晴天',
+					'搁浅',
+					'宝贝',
+					'麦浪',
+					'东西',
+					'爱你',
+					'宁夏',
+					'答案',
+					'宠爱',
+					'芒种',
+					'赤伶',
+					'朱砂',
+					'凉凉',
+					'下山',
+					'大鱼',
+					'青丝',
+					'探窗',
+					'怎叹',
+					'招娣',
+					'卜卦',
+					'酒家',
+					'她说',
+					'曹操',
+					'当你',
+					'江南',
+					'心墙',
+					'不枉',
+					'嗯哼',
+					'年轮',
+					'情歌',
+					'听海',
+					'悬溺',
+					'恒温',
+					'红豆',
+					'雨爱',
+					'不删',
+					'体面',
+					'冬眠',
+					'大眠',
+					'迷宫',
+					'迷迭香',
+					'365节',
+					'龙卷风',
+					'菊花台',
+					'东风破',
+					'发如雪',
+					'七里香',
+					'兰亭序',
+					'青花瓷',
+					'猪猪侠',
+					'坏女孩',
+					'静悄悄',
+					'喜欢你',
+					'海芋恋',
+					'我们俩',
+					'我和你',
+					'有你在',
+					'胆小鬼',
+					'恶作剧',
+					'第一天',
+					'春庭雪',
+					'燕无歇',
+					'桃花笑',
+					'典狱司',
+					'不谓侠',
+					'虞兮叹',
+					'醉赤壁',
+					'小酒窝',
+					'关键词',
+					'蓝旗袍',
+					'柠檬树',
+					'我要你',
+					'爱爱爱',
+					'小幸运',
+					'追光者',
+					'小情歌',
+					'手掌心',
+					'九张机',
+					'若把你',
+					'猜不透',
+					'水星记',
+					'等雨停',
+					'同花顺',
+					'太聪明',
+					'我记得',
+					'月牙湾',
+					'心之火',
+					'海海海',
+					'欧若拉',
+					'凄美地',
+					'BB88',
+					'Mojito',
+					'烟花易冷',
+					'红尘客栈',
+					'红颜如霜',
+					'等你下课',
+					'告白气球',
+					'是心动啊',
+					'奶茶加糖',
+					'星空剪影',
+					'有何不可',
+					'海绵宝宝',
+					'自娱自乐',
+					'星光派对',
+					'一笑倾城',
+					'为你写诗',
+					'依然爱你',
+					'恋爱频率',
+					'清明雨下',
+					'烟雨行舟',
+					'西楼别序',
+					'金风玉露',
+					'莫问归期',
+					'浪人琵琶',
+					'修炼爱情',
+					'普通朋友',
+					'呼吸决定',
+					'特别的人',
+					'星月神话',
+					'路过人间',
+					'若能再见',
+					'说散就散',
+					'你啊你啊',
+					'我怀念的',
+					'时间煮雨',
+					'神魂颠倒',
+					'危险派对',
+					'沙漠骆驼',
+					'365节',
+					'手写的从前',
+					'雨下一整晚',
+					'大手拉小手',
+					'99次我爱她',
+					'心愿便利贴',
+					'地球最可爱',
+					'多糖芒果冰',
+					'彩虹的微笑',
+					'热恋冰淇淋',
+					'梦回花事了',
+					'人间不值得',
+					'九九八十一',
+					'辞九门回忆',
+					'背对背拥抱',
+					'爱笑的眼睛',
+					'爱在比佛利',
+					'伦敦的爱情',
+					'至少还有你',
+					'我的纸飞机',
+					'踮起脚尖爱',
+					'易燃易爆炸',
+					'热爱105度的你',
+					'青春修炼手册',
+					'浪漫爱情故事',
+					'无法抗拒的你',
+					'学落下的声音',
+					'爱情怎么喊停',
+					'永不失联的爱',
+					'阿拉斯加海湾',
+					'等下一个天亮',
+					'烟火里的尘埃',
+					'南半球与北海道',
+					'山外小楼夜听雨',
+					'只要有你的地方',
+					'这世界那么多人',
+					'在意识里过一生',
+					'我期待的不是雪',
+					'天下的乌鸦一般黑',
+					'劈你的雷正在路上',
+					'我多喜欢你你会知道',
+					'想和你看五月的晚霞',
+					'我在人民广场吃炸鸡',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					''],
+					eng: ['',
+					'',
+					'',
+					'',]
+				}
+				const { max, floor, ceil } = _
+				const english = _.uniq(window.songs.english).sort()
+				const zhcn = _.uniq(window.songs.zhcn)
+				const songzh = {}
+				for(let i=1;i<=5;i++) songzh[`s${i}`] = zhcn.filter(c => c.length === i).sort((a,b) => a.localeCompare(b,'zh'))
+				songzh.so = zhcn.filter(c => c.length > 5).sort((a,b) => a.localeCompare(b,'zh'))
+				const ih = 34
+				const iw = 88
+				const songListRef1 = ref()
+				const wwidth = ref(0)
+
+				onMounted(() => {
+					const {offsetWidth:s1w,offsetHeight:s1h} = songListRef1.value[0]
+					wwidth.value = s1w
+				})
+				return {
+					wwidth,
+					songzh,
+					english,
+					zhcn,
+					max,
+					floor,
+					ceil,
+					songListRef1,
+					iw,
+					ih
+				}
+			}
+		})
+		app.use(ElementPlus).mount('#app')
+	</script>
+</html>
